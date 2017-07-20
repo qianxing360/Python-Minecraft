@@ -10,7 +10,6 @@ import time
 最后保存为.png文件，文件名最好不要用中文，将图片文件放在.py所在目录，运行程序
 '''
 
-
 mc = minecraft.Minecraft.create()
 
 # 用元组定义颜色对应的RGB，这里使用windows自带的画图软件里面默认的色彩

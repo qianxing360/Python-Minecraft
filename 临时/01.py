@@ -9,3 +9,5 @@ y = pos.y
 z = pos.z
 
 mc.setBlocks(x, y, z, x+200, y+200, z+200, block.TNT.id)
+
+drawFace(points,filled,blockID,blockData)
