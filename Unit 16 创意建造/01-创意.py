@@ -13,9 +13,6 @@ friendPos = mc.player.getTilePos()
 friendPos.x = friendPos.x+5
 
 
-mcdrawing.drawSphere(x, y, z, 20, block.WOOL.id, 3)
-
-
 def distanceBetweenPoints(point1, point2):
     xd = point2.x - point1.x
     yd = point2.y - point1.y
@@ -23,18 +20,28 @@ def distanceBetweenPoints(point1, point2):
     distance = math.sqrt((xd*xd) + (yd*yd) + (zd*zd))
 
     return distance
-def jackBlock
 
-jackBlocks = [minecraftstuff.ShapeBlock(0, 0, 0, 89),
-               minecraftstuff.ShapeBlock(0, 1, 0, 89),
-               minecraftstuff.ShapeBlock(0, 2, 0, 89),
-               minecraftstuff.ShapeBlock(-1, 2, 0, 46),
-               minecraftstuff.ShapeBlock(1, 2, 0, 46),
-               minecraftstuff.ShapeBlock(0, 3, 0, 86)]
 
-#set the horses position
-pos = mc.player.getTilePos()
-pos.z = pos.z + 1
+def jackBlock():
+    jackBlocks = [minecraftstuff.ShapeBlock(0, 0, 0, 89),
+                   minecraftstuff.ShapeBlock(0, 1, 0, 89),
+                   minecraftstuff.ShapeBlock(0, 2, 0, 89),
+                   minecraftstuff.ShapeBlock(-1, 2, 0, 46),
+                   minecraftstuff.ShapeBlock(1, 2, 0, 46),
+                   minecraftstuff.ShapeBlock(0, 3, 0, 86)]
 
-# 建造Jack
-jackShape = minecraftstuff.MinecraftShape(mc, pos, jackBlocks)
+    pos = mc.player.getTilePos()
+    pos.z = pos.z + 1
+
+    # 建造Jack
+    jackShape = minecraftstuff.MinecraftShape(mc, pos, jackBlocks)
+
+    return jackShape
+
+friend = jackBlock()
+
+for count in range(1,20):
+    time.sleep(1)
+    friend.moveBy(0,0,1)
+
+friend.clear()
