@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 f = open('tips.txt', 'r')
 line1 = f.readline()
 print line1

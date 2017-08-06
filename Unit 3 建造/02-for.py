@@ -1,9 +1,10 @@
 # -*- coding: UTF-8 -*-
 
-'''
+
 for looper in [1,2,3,4,5]:  # 注意冒号
     print 'Hello!'  # 注意前排缩进
-
+    print looper
+'''
 
 for looper in range(0, 51):
     print 'Hello!'

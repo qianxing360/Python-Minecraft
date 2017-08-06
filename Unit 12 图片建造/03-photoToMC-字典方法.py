@@ -42,7 +42,7 @@ pos = mc.player.getTilePos()
 
 im = Image.open('01.png')  # 使用open( )函数加载图片，文件名需要自己修改
 rgb_im = im.convert('RGB')  # 将图片转换为RGB模式，“RGB” 表示真彩色图像
-rows, columns = rgb_im.size  # 获取图片的尺寸大小，并保存在rows和columns里
+rows, columns = rgb_im.size  # 获取图片的行和列的长度，并保存在rows和columns里
 print rows, columns
 for r in range(rows):
     for c in range(columns):

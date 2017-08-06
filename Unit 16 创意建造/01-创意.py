@@ -4,44 +4,63 @@ import mcpi.minecraftstuff as minecraftstuff
 import mcpi.block as block
 import time
 import math
+import random
 
 mc = minecraft.Minecraft.create()
+
 mcdrawing = minecraftstuff.MinecraftDrawing(mc)
 
-playerPos = mc.player.getTilePos()
-friendPos = mc.player.getTilePos()
-friendPos.x = friendPos.x+5
+
+class CreateFriend:
+    def __init__(self, name, pos):
+        self.name = name
+        self.x = pos.x
+        self.y = pos.y+1
+        self.z = pos.z
+        mc.setBlock(self.x, self.y, self.z, 86)
+
+    def move_by(self, x, y, z):
+        mc.setBlock(self.x, self.y, self.z, block.AIR.id)
+        mc.setBlock(self.x+x, self.y+y, self.z+z, 86)
+        self.x = self.x+x
+        self.y = self.y+y
+        self.z = self.z+z
+
+    def move(self, x, y, z):
+        mc.setBlock(self.x, self.y, self.z, block.AIR.id)
+        mc.setBlock(x, y, z, 86)
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def say(self, word):
+        mc.postToChat(self.name + ':')
+        mc.postToChat(word)
 
 
-def distanceBetweenPoints(point1, point2):
-    xd = point2.x - point1.x
-    yd = point2.y - point1.y
-    zd = point2.z - point1.z
-    distance = math.sqrt((xd*xd) + (yd*yd) + (zd*zd))
+def getDistance(p1, p2):
+    xd = p1.x - p2.x
+    yd = p1.y - p2.y
+    zd = p1.z - p2.z
+    return math.sqrt(xd*xd + yd*yd + zd*zd)
 
-    return distance
+friend_pos = mc.player.getTilePos()
+
+bob = CreateFriend('bob', friend_pos)
+print bob.name, bob.x, bob.y, bob.z
 
 
-def jackBlock():
-    jackBlocks = [minecraftstuff.ShapeBlock(0, 0, 0, 89),
-                   minecraftstuff.ShapeBlock(0, 1, 0, 89),
-                   minecraftstuff.ShapeBlock(0, 2, 0, 89),
-                   minecraftstuff.ShapeBlock(-1, 2, 0, 46),
-                   minecraftstuff.ShapeBlock(1, 2, 0, 46),
-                   minecraftstuff.ShapeBlock(0, 3, 0, 86)]
+while True:
+    player_pos = mc.player.getTilePos()
 
-    pos = mc.player.getTilePos()
-    pos.z = pos.z + 1
+    distance = getDistance(player_pos, bob)
+    print distance
 
-    # 建造Jack
-    jackShape = minecraftstuff.MinecraftShape(mc, pos, jackBlocks)
+    if distance > 10:
+        bob.move(player_pos.x-1, player_pos.y, player_pos.z)
+        bob.say('Wait me!')
 
-    return jackShape
-
-friend = jackBlock()
-
-for count in range(1,20):
+    a = random.randint(-1, 1)
+    if a != 0:
+        bob.move_by(a, 0, a)
     time.sleep(1)
-    friend.moveBy(0,0,1)
-
-friend.clear()

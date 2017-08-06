@@ -1,7 +1,7 @@
 import mcpi.minecraft as minecraft
 import time
 
-mc = minecraft.Minecraft.create(address="172.29.181.63", name='sasa')
+mc = minecraft.Minecraft.create()
 
 #mc.player.setTilePos(0, 10, 0)
 
